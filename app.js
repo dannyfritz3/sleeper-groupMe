@@ -12,7 +12,7 @@ axios.get(url).then((response) => {
     sleeperResponse = error;
 });
 
-app.get('/', (req, res) => res.send(sleeperResponse));
+app.get('/', (req, res) => res.json(sleeperResponse));
 
 app.listen(port, function () {
     console.log(`App running on http://localhost:${port}`);
