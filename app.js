@@ -3,7 +3,7 @@ const axios = require('axios');
 const app = express();
 const port = 8080;
 
-app.get('/', (req, res) => res.json(getSleeperResponse()));
+app.get('/', async (req, res) => res.json(await getSleeperResponse()));
 
 app.listen(port, function () {
     console.log(`App running on http://localhost:${port}`);
