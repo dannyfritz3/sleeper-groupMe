@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "dependencies": {
     "aws-sdk": "latest",
-    "express": "latest",
-    "body-parser": "latest"
+    "axios": "^0.21.0",
+    "body-parser": "latest",
+    "express": "latest"
   },
   "description": "",
   "main": "app.js",
