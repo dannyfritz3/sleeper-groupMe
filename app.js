@@ -3,7 +3,10 @@ const axios = require('axios');
 const app = express();
 const port = 8080;
 
-app.get('/', async (req, res) => res.json(await getSleeperResponse()));
+app.get('/', async (req, res) => {
+    var response = await getSleeperResponse();
+    res.send(response);
+});
 
 app.listen(port, function () {
     console.log(`App running on http://localhost:${port}`);
@@ -12,5 +15,5 @@ app.listen(port, function () {
 async function getSleeperResponse() {
     const url = "https://api.sleeper.app/v1/league/575392779379286016"
     var response = await axios.get(url);
-    return response;
+    return response.data;
 }
