@@ -4,13 +4,7 @@ const app = express();
 const port = 8080;
 
 const url = "https://api.sleeper.app/v1/league/575392779379286016"
-var sleeperResponse;
-
-axios.get(url).then((response) => {
-    sleeperResponse = response;
-}, (error) => {
-    sleeperResponse = error;
-});
+var sleeperResponse = await axios.get(url);
 
 app.get('/', (req, res) => res.json(sleeperResponse));
 
