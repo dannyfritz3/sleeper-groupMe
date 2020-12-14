@@ -13,7 +13,7 @@ app.get('/', async (req, res) => {
 });
 
 app.post('/groupme/callbackstream', async (req, res) => {
-    console.log("GROUPME MESSAGE RECEIVED: " + req);
+    res.send(200);
 });
 
 app.listen(port, function () {
