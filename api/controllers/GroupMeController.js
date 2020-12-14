@@ -1,4 +1,4 @@
-const GroupMeService = require('../services/groupMeService');
+const GroupMeService = require('../services/GroupMeService');
 
 var groupMeService;
 
