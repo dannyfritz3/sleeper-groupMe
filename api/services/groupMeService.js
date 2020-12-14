@@ -1,7 +1,7 @@
 //var events = require('events');
 //var eventEmitter = new events.EventEmitter();
 
-module.exports = class GroupMeService {
+class GroupMeService {
     constructor() {};
 
     handleCallback(req, res) {
@@ -27,3 +27,5 @@ module.exports = class GroupMeService {
         console.log(message);
     }
 };
+
+module.exports = GroupMeService;
