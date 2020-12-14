@@ -2,6 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const app = express();
 const port = 8080;
+const groupMeService = require('./api/services/groupMeService.js');
 
 app.get('/ping', (req, res) => {
     res.send(200);
@@ -13,7 +14,11 @@ app.get('/', async (req, res) => {
 });
 
 app.post('/groupme/callbackstream', async (req, res) => {
-    res.send(200);
+    if(groupMeService.invoked(req)){
+        res.send(202)
+    } else {
+        res.send(200);
+    };
 });
 
 app.listen(port, function () {
@@ -24,4 +29,4 @@ async function getSleeperResponse() {
     const url = "https://api.sleeper.app/v1/league/575392779379286016"
     var response = await axios.get(url);
     return response.data;
-}
+};
