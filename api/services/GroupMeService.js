@@ -19,8 +19,9 @@ class GroupMeService {
     
     invoked (req) {
         try {        
-            var request = JSON.parse(req.chunks[0]);
-            var botRegex = /(?i)sleeperbot/;
+            //var request = JSON.parse(req.chunks[0]);
+            console.log("MESSAGE RECEIVED FROM GROUPME: " + req);
+            var botRegex = /(?i)@sleeperbot/;
             return req.text && botRegex.test(request.text);
         } catch(error) {
             return false;
