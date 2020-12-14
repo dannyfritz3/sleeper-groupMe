@@ -4,6 +4,7 @@
   "dependencies": {
     "aws-sdk": "latest",
     "axios": "^0.21.0",
+    "babel": "^6.23.0",
     "body-parser": "latest",
     "express": "latest"
   },
@@ -14,7 +15,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "babel-node app.js"
   },
   "repository": {
     "type": "git",
@@ -25,5 +26,11 @@
   "bugs": {
     "url": "https://github.com/dannyfritz3/sleeper-groupMe/issues"
   },
-  "homepage": "https://github.com/dannyfritz3/sleeper-groupMe#readme"
+  "homepage": "https://github.com/dannyfritz3/sleeper-groupMe#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/node": "^7.12.10",
+    "@babel/preset-env": "^7.12.10"
+  }
 }
