@@ -11,9 +11,13 @@ module.exports = (server) => {
     });
 
     server.post(`/groupme/callbackstream`, async (req, res) => {
+        console.log("GROUPME (req): " + req);
+        console.log("GROUPME (req.data): " + req.data);
+        console.log("GROUPME (req.data): " + req.data);
+
         try{
-            var test = JSON.parse(req);
-            console.log("GROUPME: " + test);
+            var test = JSON.parse(new Object(req.data));
+            console.log("GROUPME (JSON.parse(new Object(req.data))): " + test);
         } catch(error)
         {
             console.log(error);
