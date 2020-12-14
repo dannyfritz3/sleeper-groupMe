@@ -8,6 +8,10 @@ app.get('/', async (req, res) => {
     res.send(response);
 });
 
+app.post('/groupme/callbackstream', async (req, res) => {
+    console.log("GROUPME MESSAGE RECEIVED: " + req);
+});
+
 app.listen(port, function () {
     console.log(`App running on http://localhost:${port}`);
 });
