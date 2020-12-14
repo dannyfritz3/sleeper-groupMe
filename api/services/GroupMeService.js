@@ -1,13 +1,17 @@
 //var events = require('events');
 //var eventEmitter = new events.EventEmitter();
+const GroupMeAdapter = require('../adapters/GroupMeAdapter.js');
+
+var groupMeAdapter;
 
 class GroupMeService {
-    constructor() {};
+    constructor() {
+        groupMeAdapter = new GroupMeAdapter();
+    };
 
     handleCallback(req, res) {
         if(this.invoked(req)){
-            this.parseMessage(req.text)
-            res.sendStatus(202)
+            this.postMessage("testing");
         } else {
             res.sendStatus(200);
         };
@@ -25,6 +29,10 @@ class GroupMeService {
 
     parseMessage (message) {
         console.log(message);
+    }
+
+    postMessage (message) {
+        groupMeAdapter.postMessage(message);
     }
 };
 
