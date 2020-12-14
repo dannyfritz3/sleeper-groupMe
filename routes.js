@@ -11,7 +11,13 @@ module.exports = (server) => {
     });
 
     server.post(`/groupme/callbackstream`, async (req, res) => {
-        console.log("GROUPME: " + JSON.parse(req));
+        try{
+            var test = JSON.parse(req);
+            console.log("GROUPME: " + test);
+        } catch(error)
+        {
+            console.log(error);
+        }
         groupMeController.callbackStream(req, res);
     });
 };
