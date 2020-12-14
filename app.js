@@ -4,6 +4,13 @@ const port = 8080;
 const setRoutes = require('./routes.js');
 
 setRoutes(app);
+app.use(
+    express.urlencoded({
+        extended: true
+    })
+);
+
+app.use(express.json());
 
 app.listen(port, function () {
     console.log(`App running on http://localhost:${port}`);
