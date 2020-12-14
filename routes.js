@@ -11,12 +11,12 @@ module.exports = (server) => {
     });
 
     server.post(`/groupme/callbackstream`, async (req, res) => {
-        console.log("GROUPME (req): " + req);
-        console.log("GROUPME (req.data): " + req.data);
+        console.log("GROUPME (req.body.text): " + req.body.text);
         console.log("GROUPME (req.body): " + req.body);
+        console.log("GROUPME (JSON.stringify(req.body)): " + JSON.stringify(req.body));
 
         try{
-            var test = JSON.stringify(req.data);
+            var test = JSON.stringify(req.body);
             console.log("GROUPME (JSON.stringify): " + test);
         } catch(error)
         {
