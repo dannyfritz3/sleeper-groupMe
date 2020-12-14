@@ -1,8 +1,8 @@
-const GroupMeService = require('../services/GroupMeService.js');
+const GroupMeService = require('../services/GroupMeService');
 
 var groupMeService;
 
-module.exports = class GroupMeController {
+class GroupMeController {
     constructor(){
         groupMeService = new GroupMeService();
     };
@@ -11,3 +11,5 @@ module.exports = class GroupMeController {
         groupMeService.handleCallback(req, res);
     }
 };
+
+module.exports = GroupMeController;
