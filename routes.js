@@ -11,7 +11,7 @@ module.exports = (server) => {
     });
 
     server.post(`/groupme/callbackstream`, async (req, res) => {
-        console.log("GROUPME: " + JSON.parse(this.req.chunks[0]));
+        console.log("GROUPME: " + JSON.parse(req));
         groupMeController.callbackStream(req, res);
     });
 };
