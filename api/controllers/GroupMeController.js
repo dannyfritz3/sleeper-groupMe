@@ -7,9 +7,8 @@ class GroupMeController {
         groupMeService = new GroupMeService();
     };
 
-    callbackStream(req) {
-        var jsonMessage = JSON.stringify(req.body);
-        groupMeService.handleCallback(jsonMessage);
+    callbackStream(req, res) {
+        groupMeService.handleCallback(req, res);
     }
 };
 

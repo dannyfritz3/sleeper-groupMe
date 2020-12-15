@@ -11,6 +11,6 @@ module.exports = (server) => {
     });
 
     server.post(`/groupme/callbackstream`, async (req, res) => {
-        groupMeController.callbackStream(req);
+        groupMeController.callbackStream(req, res);
     });
 };

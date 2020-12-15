@@ -9,7 +9,8 @@ class GroupMeService {
         groupMeAdapter = new GroupMeAdapter();
     };
 
-    handleCallback(jsonMessage) {
+    handleCallback(req, res) {
+        var jsonMessage = JSON.stringify(req.body);
         if(this.invoked(jsonMessage.text)){
             this.postMessage("testing works ;)");
         } else {
