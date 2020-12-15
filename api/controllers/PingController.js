@@ -1,6 +1,6 @@
 class PingController {
     constructor(){};
-    ping(res) {
+    ping = (res) => {
         res.sendStatus(200);
     };
 };

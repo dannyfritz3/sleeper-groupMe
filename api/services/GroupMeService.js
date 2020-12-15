@@ -1,43 +1,43 @@
 //var events = require('events');
 //var eventEmitter = new events.EventEmitter();
 const GroupMeAdapter = require('../adapters/GroupMeAdapter.js');
-var regex = require('regex');
+const SleeperService = require('./SleeperService.js')
+const natural = require('natural');
 
-var groupMeAdapter;
+var groupMeAdapter, sleeperService;
 
 class GroupMeService {
     constructor() {
         groupMeAdapter = new GroupMeAdapter();
+        sleeperService = new SleeperService();
     };
 
     //TODO change all of this stuff to publish/subscribe architecture
     //TODO add model for jsonMessage coming in from GroupMe
-    handleCallback(req, res) {
+    handleCallback = async (req, res) => {
         var jsonMessage = JSON.parse(JSON.stringify(req.body));
-        var botRegex = /@sleeperbot/i;
-        var test = botRegex.test(jsonMessage.text);
-        console.log("GroupMe message text: " + jsonMessage.text + "\nRegEx Match: " + test);
-        if(jsonMessage.name != "Sleeper Bot" && test) {
+        var isValidSender = jsonMessage.name != "Sleeper Bot";
+        if(isValidSender && this.botInvoked(jsonMessage.text)) {
+            this.parseMessage(jsonMessage);
             this.postMessage(jsonMessage.text);
+        }
+        else {
+            //This is for testing
+            console.log(await sleeperService.getRosterByUserId("579368014944706560"));
         };
     }
     
-    // invoked (messageText) {
-    //     try {        
-    //         var botRegex = /(?i)@sleeperbot/;
-    //         var test = messageText && botRegex.test(messageText);
-    //         console.log("RegEx Test: " + test);
-    //         return messageText && botRegex.test(messageText);
-    //     } catch(error) {
-    //         return false;
-    //     };
-    // }
-
-    parseMessage (message) {
-        console.log(message);
+    botInvoked = (messageText) => {
+        var botRegex = /@sleeperbot/i;
+        return botRegex.test(messageText);
     }
 
-    postMessage (message) {
+    parseMessage = (jsonMessage) => {
+        const tokenizer = new natural.WordTokenizer();
+        var tokenArray = tokenizer.tokenize(jsonMessage.text);
+    }
+
+    postMessage = (message) => {
         groupMeAdapter.postMessage(message);
     }
 };
