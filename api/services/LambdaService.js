@@ -1,4 +1,4 @@
-const SleeperService = require('../adapters/SleeperService.js');
+const SleeperService = require('../services/SleeperService.js');
 const GroupMeService = require('../services/GroupMeService.js');
 
 var sleeperService, groupMeService;
