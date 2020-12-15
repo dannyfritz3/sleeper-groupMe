@@ -13,7 +13,7 @@ class GroupMeService {
     //TODO add model for jsonMessage coming in from GroupMe
     handleCallback(req, res) {
         var jsonMessage = JSON.parse(JSON.stringify(req.body));
-        var botRegex = /(?i)@sleeperbot/;
+        var botRegex = /(?i)@sleeperbot/g;
         var test = botRegex.test(jsonMessage.text);
         console.log("GroupMe message text: " + jsonMessage.text + "\nRegEx Match: " + test);
         if(test) {
