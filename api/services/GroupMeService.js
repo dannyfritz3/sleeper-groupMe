@@ -11,8 +11,6 @@ class GroupMeService {
 
     handleCallback(req, res) {
         var jsonMessage = JSON.parse(JSON.stringify(req.body));
-        console.log("GroupMe message received: " + jsonMessage);
-        console.log("GroupMe Text: " + jsonMessage.text)
         if(this.invoked(jsonMessage.text)){
             this.postMessage("testing works ;)");
         } else {
@@ -23,6 +21,8 @@ class GroupMeService {
     invoked (messageText) {
         try {        
             var botRegex = /(?i)@sleeperbot/;
+            var test = messageText && botRegex.test(messageText);
+            console.log("RegEx Test: " + test);
             return messageText && botRegex.test(messageText);
         } catch(error) {
             return false;
