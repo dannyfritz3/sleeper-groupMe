@@ -9,9 +9,17 @@ class GroupMeService {
         groupMeAdapter = new GroupMeAdapter();
     };
 
+    //TODO change all of this stuff to publish/subscribe architecture
+    //TODO add model for jsonMessage coming in from GroupMe
     handleCallback(req, res) {
         var jsonMessage = JSON.parse(JSON.stringify(req.body));
-        this.postMessage(jsonMessage.text);
+        var botRegex = /(?i)sleeperbot/;
+        if(botRegex.test(jsonMessage.name)) {
+            this.postMessage(jsonMessage.text);
+        }
+        else {
+            res.sendStatus(200);
+        }
     }
     
     invoked (messageText) {
