@@ -10,7 +10,7 @@ class GroupMeService {
     };
 
     handleCallback(req, res) {
-        var jsonMessage = JSON.stringify(req.body);
+        var jsonMessage = JSON.parse(JSON.stringify(req.body));
         console.log("GroupMe message received: " + jsonMessage);
         console.log("GroupMe Text: " + jsonMessage.text)
         if(this.invoked(jsonMessage.text)){
