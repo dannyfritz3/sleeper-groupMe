@@ -11,6 +11,7 @@ class GroupMeService {
 
     handleCallback(req, res) {
         var jsonMessage = JSON.stringify(req.body);
+        console.log("GroupMe message received: " + jsonMessage);
         if(this.invoked(jsonMessage.text)){
             this.postMessage("testing works ;)");
         } else {
