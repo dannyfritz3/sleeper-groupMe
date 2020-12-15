@@ -11,7 +11,7 @@ class GroupMeService {
 
     handleCallback(req, res) {
         var jsonMessage = JSON.parse(JSON.stringify(req.body));
-        postMessage(jsonMessage.text);
+        this.postMessage(jsonMessage.text);
     }
     
     invoked (messageText) {
