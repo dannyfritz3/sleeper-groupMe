@@ -17,7 +17,7 @@ class GroupMeService {
         var botRegex = new regex(/(?i)@sleeperbot/);
         var test = botRegex.test(jsonMessage.text);
         console.log("GroupMe message text: " + jsonMessage.text + "\nRegEx Match: " + test);
-        if(test) {
+        if(jsonMessage.name != "Sleeper Bot" && test) {
             this.postMessage(jsonMessage.text);
         };
     }
