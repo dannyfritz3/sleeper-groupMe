@@ -14,7 +14,7 @@ class GroupMeService {
     //TODO add model for jsonMessage coming in from GroupMe
     handleCallback(req, res) {
         var jsonMessage = JSON.parse(JSON.stringify(req.body));
-        var botRegex = new regex(/(?i)@sleeperbot/);
+        var botRegex = /@sleeperbot/i;
         var test = botRegex.test(jsonMessage.text);
         console.log("GroupMe message text: " + jsonMessage.text + "\nRegEx Match: " + test);
         if(jsonMessage.name != "Sleeper Bot" && test) {
