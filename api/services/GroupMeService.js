@@ -9,19 +9,18 @@ class GroupMeService {
         groupMeAdapter = new GroupMeAdapter();
     };
 
-    handleCallback(req, res) {
-        if(this.invoked(req)){
-            this.postMessage("testing");
+    handleCallback(jsonMessage) {
+        if(this.invoked(jsonMessage.text)){
+            this.postMessage("testing works ;)");
         } else {
             res.sendStatus(200);
         };
     }
     
-    invoked (req) {
+    invoked (messageText) {
         try {        
-            //var request = JSON.parse(req.chunks[0]);
             var botRegex = /(?i)@sleeperbot/;
-            return req.text && botRegex.test(req.body.text);
+            return messageText && botRegex.test(messageText);
         } catch(error) {
             return false;
         };
