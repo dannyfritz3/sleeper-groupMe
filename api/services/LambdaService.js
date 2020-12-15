@@ -10,7 +10,7 @@ module.exports = class LambdaService {
     };
 
     broadcastTopScorerEvent = () => {
-        
+        groupMeService.postMessage("cron job works");
     }
 
     broadcastMatchupLeadersEvent = () => {
