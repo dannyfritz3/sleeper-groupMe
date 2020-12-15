@@ -14,7 +14,7 @@ class GroupMeService {
     handleCallback(req, res) {
         var jsonMessage = JSON.parse(JSON.stringify(req.body));
         console.log("GroupMe sender: " + jsonMessage.name);
-        if(!jsonMessage.name == "Sleeper Bot") {
+        if(jsonMessage.name != "Sleeper Bot") {
             this.postMessage(jsonMessage.text);
         };
     }
