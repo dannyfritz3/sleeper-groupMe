@@ -14,6 +14,7 @@ module.exports = class LambdaService {
     }
 
     broadcastMatchupLeadersEvent = () => {
-
+        var matchups = sleeperService.getCurrentMatchups();
+        
     }
 }
