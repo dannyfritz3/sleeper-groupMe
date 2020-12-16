@@ -10,6 +10,7 @@ module.exports = (server) => {
 
     server.get(`/`, (req, res) => {
         pingController.ping(res);
+        lambdaController.broadcastMatchupLeadersEvent();
     });
 
     server.post(`/groupme/callbackstream`, async (req, res) => {
@@ -21,6 +22,6 @@ module.exports = (server) => {
     });
 
     server.get('/broadcast/matchupLeaders', async (req, res) => {
-        lambdaController.broadcastMatchupLeadersEvent(req, res);
+        lambdaController.broadcastMatchupLeadersEvent();
     });
 };
