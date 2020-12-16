@@ -1,24 +1,21 @@
-const SleeperService = require('../services/SleeperService.js');
-const GroupMeService = require('../services/GroupMeService.js');
-
-var sleeperService, groupMeService;
+var _sleeperService, _groupMeService;
 
 module.exports = class LambdaService {
-    constructor() {
-        sleeperService = new SleeperService();
-        groupMeService = new GroupMeService();
+    constructor(sleeperService, groupMeService) {
+        _sleeperService = sleeperService;
+        _groupMeService = groupMeService;
     };
 
     broadcastTopScorerEvent = () => {
-        groupMeService.postMessage("cron job works");
+        _groupMeService.postMessage("cron job works");
     }
 
     broadcastMatchupLeadersEvent = () => {
-        var matchups = sleeperService.getCurrentMatchups();
+        var matchups = _sleeperService.getCurrentMatchups();
         
         var matchupArray = [];
 
-        matchups.array.forEach(matchup => {
+        matchups.array.forEach((matchup, index) => {
             //pick apart matchup JSON and map it to the matchupObject
 
             var matchupObject = {
