@@ -17,7 +17,7 @@ module.exports = class SleeperService {
     };
 
     getCurrentMatchups = async () => {
-        var currentWeekNumber = this.getWeekNumber();
+        var currentWeekNumber = await this.getWeekNumber();
         return this.getMatchupsByWeekNumber(currentWeekNumber);
     };
 
