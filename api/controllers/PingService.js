@@ -1,8 +1,8 @@
-class PingController {
+class PingService {
     constructor(){};
     ping = (res) => {
         res.sendStatus(200);
     };
 };
 
-module.exports = PingController
+module.exports = PingService;

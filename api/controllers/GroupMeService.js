@@ -1,15 +1,13 @@
 //var events = require('events');
 //var eventEmitter = new events.EventEmitter();
-const GroupMeAdapter = require('../adapters/GroupMeAdapter.js');
-const SleeperService = require('./SleeperService.js')
 const natural = require('natural');
 
-var groupMeAdapter, sleeperService;
+var _sleeperService, _groupMeAdapter;
 
 class GroupMeService {
-    constructor() {
-        groupMeAdapter = new GroupMeAdapter();
-        sleeperService = new SleeperService();
+    constructor(sleeperService, groupMeAdapter) {
+        _sleeperService = sleeperService;
+        _groupMeAdapter = groupMeAdapter;
     };
 
     //TODO change all of this stuff to publish/subscribe architecture
@@ -23,7 +21,7 @@ class GroupMeService {
         }
         else {
             //This is for testing
-            console.log(await sleeperService.getRosterByUserId("579368014944706560"));
+            console.log(await _sleeperService.getRosterByUserId("579368014944706560"));
         };
     }
     
@@ -38,7 +36,7 @@ class GroupMeService {
     }
 
     postMessage = (message) => {
-        groupMeAdapter.postMessage(message);
+        _groupMeAdapter.postMessage(message);
     }
 };
 
