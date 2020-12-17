@@ -9,7 +9,7 @@ module.exports = class GroupMeAdapter {
     postMessage = async (message) => {
         console.log("Posting Message: " + message);
         const url = `${groupMeApiBaseUrl}`
-        var response = await axios.post(url, {"text": message, "bot_id": testBotId});
+        var response = await axios.post(url, {"text": message, "bot_id": botId});
         return response;
     };
 };
