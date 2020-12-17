@@ -1,6 +1,6 @@
 const axios = require('axios');
 const groupMeApiBaseUrl = "https://api.groupme.com/v3/bots/post";
-const botId = "3e0d38ea2f9b5faf166587dcd9";
+const botId = "4be6c818af3ed6c6248324f17a";
 const testBotId = "7645b38769f3684a49319a64ee";
 
 module.exports = class GroupMeAdapter {
