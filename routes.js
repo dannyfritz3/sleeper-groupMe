@@ -23,7 +23,7 @@ module.exports = (server) => {
     server.post(`/groupme/callbackstream`, async (req, res) => {
         try
         {
-            _groupMeService.callbackStream(req, res);
+            _groupMeService.handleCallback(req, res);
         } catch(error)
         {
             console.log(error);
