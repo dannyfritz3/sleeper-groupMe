@@ -1,15 +1,16 @@
-let _sleeperService, _config;
+let _sleeperService, _groupMeAdapter, _config;
 
 class MatchupService {
-    constructor (sleeperService, config) { 
+    constructor (sleeperService, groupMeAdapter, config) { 
         _sleeperService = sleeperService;
+        _groupMeAdapter = groupMeAdapter;
         _config = config;
     }
 
-    getMatchupsMessage = async () => {
+    postMatchupsUpdate = async () => {
         let matchups = await this.getMatchups();
         let message = this.buildMatchupMessage(matchups);
-        return message;
+        _groupMeAdapter.postMessage(message);
     }
 
     getMatchups = async () => {

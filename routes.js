@@ -14,7 +14,7 @@ module.exports = (server) => {
     var _pingService = new PingService();
     var _sleeperService = new SleeperService(_sleeperAdapter);
     var _groupMeService = new GroupMeService(_sleeperService, _groupMeAdapter);
-    var _matchupsService = new MatchupService(_sleeperService, config);
+    var _matchupsService = new MatchupService(_sleeperService, _groupMeAdapter, config);
     var _lambdaService = new LambdaService(_matchupsService, _groupMeAdapter);
     var _injuryService = new InjuryService(_groupMeAdapter);
 
@@ -35,7 +35,7 @@ module.exports = (server) => {
     server.get('/broadcast/topScorer', async (req, res) => {
         try
         {
-            var result = await _lambdaService.broadcastTopScorerEvent(req, res);
+            var result = await _groupMeAdapter.postMessage("cron job works");
             res.send(result);
         } catch(error)
         {
@@ -46,7 +46,7 @@ module.exports = (server) => {
     server.get('/broadcast/matchupLeaders', async (req, res) => {
         try
         {
-            var result = await _lambdaService.broadcastMatchupLeadersEvent();
+            var result = await _matchupsService.postMatchupsUpdate();
             res.send(result);
         } catch(error)
         {
