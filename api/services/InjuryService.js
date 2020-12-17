@@ -21,10 +21,10 @@ class InjuryService {
     }
 
     buildInjuryReportMessage = (injuryReport) => {
-        let message = "Injury Report:\n\n";
+        let message = "INJURY REPORT:\n\n";
 
         injuryReport.forEach(reportTitle => {
-            message += `${reportTitle.title}\n`
+            message += `${reportTitle.title}\n\n`
         });
 
         return message;

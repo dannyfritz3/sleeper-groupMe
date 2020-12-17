@@ -5,6 +5,7 @@ const GroupMeService = require('./api/controllers/GroupMeService.js');
 const GroupMeAdapter = require('./api/adapters/GroupMeAdapter.js');
 const SleeperAdapter = require('./api/adapters/SleeperAdapter.js');
 const InjuryService = require('./api/services/InjuryService.js');
+const MatchupService = require('./api/services/MatchupService.js');
 const config = require('./config.json');
 
 module.exports = (server) => {
@@ -13,7 +14,8 @@ module.exports = (server) => {
     var _pingService = new PingService();
     var _sleeperService = new SleeperService(_sleeperAdapter);
     var _groupMeService = new GroupMeService(_sleeperService, _groupMeAdapter);
-    var _lambdaService = new LambdaService(_sleeperService, _groupMeService, config);
+    var _matchupsService = new MatchupService(_sleeperService, config);
+    var _lambdaService = new LambdaService(_matchupsService, _groupMeService);
     var _injuryService = new InjuryService(_groupMeService);
 
     server.get(`/`, async (req, res) => {

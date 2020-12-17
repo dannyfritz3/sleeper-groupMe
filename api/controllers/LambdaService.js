@@ -1,10 +1,9 @@
-var _sleeperService, _groupMeService, _config;
+var _matchupService, _groupMeService;
 
 module.exports = class LambdaService {
-    constructor(sleeperService, groupMeService, config) {
-        _sleeperService = sleeperService;
+    constructor(matchupService, groupMeService) {
+        _matchupService = matchupService;
         _groupMeService = groupMeService;
-        _config = config;
     };
 
     broadcastTopScorerEvent = () => {
@@ -12,39 +11,7 @@ module.exports = class LambdaService {
     }
 
     broadcastMatchupLeadersEvent = async () => {
-        var matchupsData = await _sleeperService.getCurrentMatchups();
-        
-        if(matchupsData) {
-            var formattedMatchupArray = [];
-
-            for(var i = 1; i <= 5; i++) {
-                var matchup = matchupsData.filter(matchup => matchup.matchup_id == i);
-                
-                if(matchup) {
-                    var test = _config.usermappings.find(user => user.roster_id == matchup[0].roster_id);
-    
-                    var formattedMatchup = {
-                        "home": {
-                            "name": this.getGroupMeNameByRosterId(matchup[0].roster_id),
-                            "points": matchup[0].points
-                        },
-                        "away": {
-                            "name":this.getGroupMeNameByRosterId(matchup[1].roster_id),
-                            "points": matchup[1].points
-                        }
-                    };
-                    
-                    formattedMatchupArray.push(formattedMatchup);
-                }
-            }
-    
-            return formattedMatchupArray;
-        }
-
+        let message = await _matchupService.getMatchupsMessage();
+        _groupMeService.postMessage(message);
     }
-
-    getGroupMeNameByRosterId = (rosterId) => {
-        var user = _config.usermappings.find(user => user.roster_id == rosterId);
-        return user.groupme_name;
-    };
 }
