@@ -18,7 +18,7 @@ class GroupMeService {
 
         if(isValidSender && this.botInvoked(jsonMessage.text)) {
             //this.parseMessage(jsonMessage);
-            this.postMessage("i can't take arguments yet :( coming soon...");
+            _groupMeAdapter.postMessage("i can't take arguments yet :( coming soon...");
         }
     }
     
@@ -30,10 +30,6 @@ class GroupMeService {
     parseMessage = (jsonMessage) => {
         const tokenizer = new natural.WordTokenizer();
         var tokenArray = tokenizer.tokenize(jsonMessage.text);
-    }
-
-    postMessage = (message) => {
-        _groupMeAdapter.postMessage(message);
     }
 };
 

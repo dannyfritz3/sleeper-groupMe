@@ -1,18 +1,18 @@
 const Parser = require('rss-parser');
 let parser = new Parser();
 
-var _groupMeService;
+var _groupMeAdapter;
 
 class InjuryService {
-    constructor (groupMeService) {
+    constructor (groupMeAdapter) {
         //this will need to be fixed with the new framework. No more dependency injection here.
-        _groupMeService = groupMeService;
+        _groupMeAdapter = groupMeAdapter;
     }
 
     postInjuryReport = async () => {
         let injuryReport = await this.getInjuryReportFromRotowireFeed();
         let message = this.buildInjuryReportMessage(injuryReport);
-        _groupMeService.postMessage(message);
+        _groupMeAdapter.postMessage(message);
     }
 
     getInjuryReportFromRotowireFeed = async () => {

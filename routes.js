@@ -15,8 +15,8 @@ module.exports = (server) => {
     var _sleeperService = new SleeperService(_sleeperAdapter);
     var _groupMeService = new GroupMeService(_sleeperService, _groupMeAdapter);
     var _matchupsService = new MatchupService(_sleeperService, config);
-    var _lambdaService = new LambdaService(_matchupsService, _groupMeService);
-    var _injuryService = new InjuryService(_groupMeService);
+    var _lambdaService = new LambdaService(_matchupsService, _groupMeAdapter);
+    var _injuryService = new InjuryService(_groupMeAdapter);
 
     server.get(`/`, async (req, res) => {
         _pingService.ping(res);
