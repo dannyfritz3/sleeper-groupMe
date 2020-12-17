@@ -33,6 +33,7 @@ module.exports = (server) => {
     server.get('/broadcast/topScorer', async (req, res) => {
         try
         {
+            //TODO need to actually create service function for this
             var result = await _groupMeAdapter.postMessage("cron job works");
             res.send(result);
         } catch(error)

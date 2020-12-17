@@ -5,7 +5,6 @@ var _groupMeAdapter;
 
 class InjuryService {
     constructor (groupMeAdapter) {
-        //this will need to be fixed with the new framework. No more dependency injection here.
         _groupMeAdapter = groupMeAdapter;
     }
 
