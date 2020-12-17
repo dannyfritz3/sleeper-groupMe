@@ -4,6 +4,7 @@ const SleeperService = require('./api/controllers/SleeperService.js');
 const GroupMeService = require('./api/controllers/GroupMeService.js');
 const GroupMeAdapter = require('./api/adapters/GroupMeAdapter.js');
 const SleeperAdapter = require('./api/adapters/SleeperAdapter.js');
+const InjuryService = require('./api/services/InjuryService.js');
 const config = require('./config.json');
 
 module.exports = (server) => {
@@ -13,16 +14,10 @@ module.exports = (server) => {
     var _sleeperService = new SleeperService(_sleeperAdapter);
     var _groupMeService = new GroupMeService(_sleeperService, _groupMeAdapter);
     var _lambdaService = new LambdaService(_sleeperService, _groupMeService, config);
+    var _injuryService = new InjuryService();
 
     server.get(`/`, async (req, res) => {
-        try
-        {
-            //_pingService.ping(res);
-            res.send(await _lambdaService.broadcastMatchupLeadersEvent());
-        } catch(error)
-        {
-            console.log(error);
-        }
+        _pingService.ping(res);
     });
 
     server.post(`/groupme/callbackstream`, async (req, res) => {
@@ -38,7 +33,8 @@ module.exports = (server) => {
     server.get('/broadcast/topScorer', async (req, res) => {
         try
         {
-            _lambdaService.broadcastTopScorerEvent(req, res);
+            var result = await _lambdaService.broadcastTopScorerEvent(req, res);
+            res.send(result);
         } catch(error)
         {
             console.log(error);
@@ -48,9 +44,20 @@ module.exports = (server) => {
     server.get('/broadcast/matchupLeaders', async (req, res) => {
         try
         {
-            _lambdaService.broadcastMatchupLeadersEvent();
+            var result = await _lambdaService.broadcastMatchupLeadersEvent();
+            res.send(result);
         } catch(error)
         {
+            console.log(error);
+        }
+    });
+
+    server.get('/broadcast/injuryreport', async (req, res) => {
+        try
+        {
+            var result = await _injuryService.getInjuryList();
+            res.send(result);
+        } catch (error) {
             console.log(error);
         }
     });
