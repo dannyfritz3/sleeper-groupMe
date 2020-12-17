@@ -14,6 +14,7 @@ class GroupMeService {
     //TODO add model for jsonMessage coming in from GroupMe
     handleCallback = async (req, res) => {
         var jsonMessage = JSON.parse(JSON.stringify(req.body));
+        console.log(`GROUPME REQUEST: ${jsonMessage}`)
         var isValidSender = jsonMessage.name != "Sleeper Bot";
         if(isValidSender && this.botInvoked(jsonMessage.text)) {
             this.parseMessage(jsonMessage);

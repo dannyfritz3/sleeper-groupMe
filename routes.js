@@ -14,7 +14,7 @@ module.exports = (server) => {
     var _sleeperService = new SleeperService(_sleeperAdapter);
     var _groupMeService = new GroupMeService(_sleeperService, _groupMeAdapter);
     var _lambdaService = new LambdaService(_sleeperService, _groupMeService, config);
-    var _injuryService = new InjuryService();
+    var _injuryService = new InjuryService(_groupMeService);
 
     server.get(`/`, async (req, res) => {
         _pingService.ping(res);
@@ -55,7 +55,7 @@ module.exports = (server) => {
     server.get('/broadcast/injuryreport', async (req, res) => {
         try
         {
-            var result = await _injuryService.getInjuryList();
+            var result = await _injuryService.postInjurtReport();
             res.send(result);
         } catch (error) {
             console.log(error);

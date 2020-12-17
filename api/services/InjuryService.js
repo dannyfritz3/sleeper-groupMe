@@ -15,18 +15,25 @@ class InjuryService {
         return injuryReport;
     }
 
-    postInjurtReport = async (injuryReport) => {
-        let message = buildMessage(injuryReport);
+    postInjurtReport = async () => {
+        let injuryReport = await this.getInjuryReport();
+        let message = this.buildInjuryReportMessage(injuryReport);
         _groupMeService.postMessage(message);
-    };
+    }
 
     getRotowireFeed = async () => {
         let rssFeed = await parser.parseURL('https://www.rotowire.com/rss/news.php?sport=NFL');
         return rssFeed.items;
     }
 
-    buildMessage = () => {
+    buildInjuryReportMessage = (injuryReport) => {
+        let message = "Injury Report:\n\n";
 
+        injuryReport.forEach(reportTitle => {
+            message += `${reportTitle.title}\n`
+        });
+
+        return message;
     }
 
 }
