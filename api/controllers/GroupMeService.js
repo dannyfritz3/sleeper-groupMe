@@ -17,8 +17,8 @@ class GroupMeService {
         var isValidSender = jsonMessage.name != "Sleeper Bot";
 
         if(isValidSender && this.botInvoked(jsonMessage.text)) {
-            this.parseMessage(jsonMessage);
-            this.postMessage(jsonMessage.text);
+            //this.parseMessage(jsonMessage);
+            this.postMessage("i can't take arguments yet :( coming soon...");
         }
     }
     
