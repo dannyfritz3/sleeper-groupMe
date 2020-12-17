@@ -9,19 +9,13 @@ class InjuryService {
         _groupMeService = groupMeService;
     }
 
-    getInjuryReport = async () => {
-        let injuryReport = await this.getRotowireFeed();
-        //need to write a function that takes the rotowire feed and builds a message to be posted out
-        return injuryReport;
-    }
-
-    postInjurtReport = async () => {
-        let injuryReport = await this.getInjuryReport();
+    postInjuryReport = async () => {
+        let injuryReport = await this.getInjuryReportFromRotowireFeed();
         let message = this.buildInjuryReportMessage(injuryReport);
         _groupMeService.postMessage(message);
     }
 
-    getRotowireFeed = async () => {
+    getInjuryReportFromRotowireFeed = async () => {
         let rssFeed = await parser.parseURL('https://www.rotowire.com/rss/news.php?sport=NFL');
         return rssFeed.items;
     }

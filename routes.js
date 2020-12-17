@@ -55,7 +55,7 @@ module.exports = (server) => {
     server.get('/broadcast/injuryreport', async (req, res) => {
         try
         {
-            var result = await _injuryService.postInjurtReport();
+            var result = await _injuryService.postInjuryReport();
             res.send(result);
         } catch (error) {
             console.log(error);
