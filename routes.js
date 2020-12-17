@@ -1,5 +1,4 @@
 const PingService = require('./api/services/PingService.js');
-const LambdaService = require('./api/services/LambdaService.js');
 const SleeperService = require('./api/services/SleeperService.js');
 const GroupMeService = require('./api/services/GroupMeService.js');
 const GroupMeAdapter = require('./api/adapters/GroupMeAdapter.js');
@@ -15,7 +14,6 @@ module.exports = (server) => {
     var _sleeperService = new SleeperService(_sleeperAdapter);
     var _groupMeService = new GroupMeService(_sleeperService, _groupMeAdapter);
     var _matchupsService = new MatchupService(_sleeperService, _groupMeAdapter, config);
-    var _lambdaService = new LambdaService(_matchupsService, _groupMeAdapter);
     var _injuryService = new InjuryService(_groupMeAdapter);
 
     server.get(`/`, async (req, res) => {
