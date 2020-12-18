@@ -12,8 +12,8 @@ module.exports = (server) => {
     var _groupMeAdapter = new GroupMeAdapter();
     var _pingService = new PingService();
     var _sleeperService = new SleeperService(_sleeperAdapter);
-    var _groupMeService = new GroupMeService(_sleeperService, _groupMeAdapter);
     var _matchupsService = new MatchupService(_sleeperService, _groupMeAdapter, config);
+    var _groupMeService = new GroupMeService(_sleeperService, _matchupsService, _groupMeAdapter);
     var _injuryService = new InjuryService(_groupMeAdapter);
 
     server.get(`/`, async (req, res) => {

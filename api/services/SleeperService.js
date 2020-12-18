@@ -24,4 +24,8 @@ module.exports = class SleeperService {
     getMatchupsByWeekNumber = async (weekNumber) => {
         return await _sleeperAdapter.getLeagueMatchupsByWeekNumber(weekNumber);
     }
+
+    getLeagueStandings = async () => {
+
+    }
 }
