@@ -19,18 +19,18 @@ module.exports = (server) => {
     var _groupMeService = new GroupMeService(_matchupsService, _injuryService, _groupMeAdapter);
 
     server.get(`/`, async (req, res) => {
-        res.send(200);
+        res.sendStatus(200);
     });
 
     server.post(`/groupme/callbackstream`, async (req, res) => {
         try
         {
             _groupMeService.handleCallback(req, res);
-            res.send(200);
+            res.sendStatus(200);
         } catch(error)
         {
             console.log(error);
-            res.send(500);
+            res.sendStatus(500);
         }
     });
 
@@ -39,11 +39,11 @@ module.exports = (server) => {
         {
             //TODO need to actually create service function for this
             await _groupMeAdapter.postMessage("cron job works");
-            res.send(200);
+            res.sendStatus(200);
         } catch(error)
         {
             console.log(error);
-            res.send(500);
+            res.sendStatus(500);
         }
     });
 
@@ -51,11 +51,11 @@ module.exports = (server) => {
         try
         {
             await _matchupsService.postMatchupsUpdate();
-            res.send(200);
+            res.sendStatus(200);
         } catch(error)
         {
             console.log(error);
-            res.send(500);
+            res.sendStatus(500);
         }
     });
 
@@ -63,10 +63,10 @@ module.exports = (server) => {
         try
         {
             await _injuryService.postInjuryReport();
-            res.send(200);
+            res.sendStatus(200);
         } catch (error) {
             console.log(error);
-            res.send(500);
+            res.sendStatus(500);
         }
     });
 
@@ -74,10 +74,10 @@ module.exports = (server) => {
         try
         {
             await _awsService.updatePlayersTable();
-            res.send(200);   
+            res.sendStatus(200);   
         } catch (error) {
             console.log(error);
-            res.send(500);
+            res.sendStatus(500);
         }
     });
 };
