@@ -43,7 +43,7 @@ class GroupMeService {
         let arg = argument.toLowerCase();
         switch(arg) {
             case "help":
-                await _groupMeAdapter.postMessage("how to use sleeperbot :)\n\n\"@sleeperbot {arggument}\"\n\nwhere argument can be:\n\n\"help\"\n\"injuries\"\n\"matchups\"");
+                await _groupMeAdapter.postMessage("how to use sleeperbot :)\n\n\"@sleeperbot {argument}\"\n\nwhere argument can be:\n\n\"help\"\n\"injuries\"\n\"matchups\"");
                 break;
             case "standings":
                 await _groupMeAdapter.postMessage("sorry, can't do standings yet...");
