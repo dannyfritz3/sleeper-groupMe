@@ -8,7 +8,8 @@ module.exports = class SleeperService {
     getTeamNameByOwnerId = async (ownerId) => {
         let userData = await _sleeperAdapter.getLeagueUsers();
         let userMatch = userData.filter(user => user.user_id == ownerId);
-        return userMatch[0].metadata.team_name;
+        let returnName = userMatch[0].metadata.team_name == null ? 'TeamLitNoCap' : userMatch[0].metadata.team_name;
+        return returnName;
     }
 
     getWeekNumber = async () => {

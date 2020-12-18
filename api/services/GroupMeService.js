@@ -2,12 +2,12 @@
 //var eventEmitter = new events.EventEmitter();
 const natural = require('natural');
 
-var _sleeperService, _matchupsService, _groupMeAdapter;
+var _matchupsService, _injuryService, _groupMeAdapter;
 
 class GroupMeService {
-    constructor(sleeperService, matchupsService, groupMeAdapter) {
-        _sleeperService = sleeperService;
+    constructor(matchupsService, injuryService, groupMeAdapter) {
         _matchupsService = matchupsService;
+        _injuryService = injuryService;
         _groupMeAdapter = groupMeAdapter;
     };
 
@@ -19,7 +19,6 @@ class GroupMeService {
 
         if(isValidSender && this.botInvoked(jsonMessage.text)) {
             this.parseMessage(jsonMessage);
-            _groupMeAdapter.postMessage("i can't take arguments yet :( coming soon...");
         }
     }
     
@@ -32,19 +31,31 @@ class GroupMeService {
         const tokenizer = new natural.WordTokenizer();
         let tokenArray = tokenizer.tokenize(jsonMessage.text);
         let argument = tokenArray[1];
-        this.argumentsHandler(argument);
+        let argumentsArray = ["help", "standings", "injuries", "matchups", "waivers"]
+        if(argumentsArray.includes(argument)) {
+            this.argumentsHandler(argument);
+        } else {
+            _groupMeAdapter.postMessage("i'm sorry, i don't know what that means");
+        }
     }
 
-    argumentsHandler = (argument) => {
-        switch(argument) {
-            case /standings/i:
+    argumentsHandler = async (argument) => {
+        let arg = argument.toLowerCase();
+        switch(arg) {
+            case "help":
+                await _groupMeAdapter.postMessage("how to use sleeperbot :)\n\n\"@sleeperbot {arggument}\"\n\nwhere argument can be:\n\n\"help\"\n\"injuries\"\n\"matchups\"");
+                break;
+            case "standings":
+                await _groupMeAdapter.postMessage("sorry, can't do standings yet...");
+                break;
+            case "injuries":
+                await _injuryService.postInjuryReport();
+                break;
+            case "matchups":
+                await _matchupsService.postMatchupsUpdate();
+                break;
+            case "waivers":
 
-            break;
-            case /injuries/i:
-
-            break;
-            case /matchup/i:
-                _sleeperService.
                 break;
             default:
                 //
