@@ -15,6 +15,7 @@ class InjuryService {
     }
 
     getInjuryReportFromRotowireFeed = async () => {
+        //this should technically go in its own adapter file
         let rssFeed = await parser.parseURL('https://www.rotowire.com/rss/news.php?sport=NFL');
         return rssFeed.items;
     }
