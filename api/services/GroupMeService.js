@@ -2,11 +2,12 @@
 //var eventEmitter = new events.EventEmitter();
 const natural = require('natural');
 
-var _sleeperService, _groupMeAdapter;
+var _sleeperService, _matchupsService, _groupMeAdapter;
 
 class GroupMeService {
-    constructor(sleeperService, groupMeAdapter) {
+    constructor(sleeperService, matchupsService, groupMeAdapter) {
         _sleeperService = sleeperService;
+        _matchupsService = matchupsService;
         _groupMeAdapter = groupMeAdapter;
     };
 
@@ -15,14 +16,11 @@ class GroupMeService {
     handleCallback = async (req, res) => {
         var jsonMessage = JSON.parse(JSON.stringify(req.body));
         var isValidSender = jsonMessage.name != "Sleeper Bot";
+
         if(isValidSender && this.botInvoked(jsonMessage.text)) {
             this.parseMessage(jsonMessage);
-            this.postMessage(jsonMessage.text);
+            _groupMeAdapter.postMessage("i can't take arguments yet :( coming soon...");
         }
-        else {
-            //This is for testing
-            console.log(await _sleeperService.getRosterByUserId("579368014944706560"));
-        };
     }
     
     botInvoked = (messageText) => {
@@ -32,11 +30,25 @@ class GroupMeService {
 
     parseMessage = (jsonMessage) => {
         const tokenizer = new natural.WordTokenizer();
-        var tokenArray = tokenizer.tokenize(jsonMessage.text);
+        let tokenArray = tokenizer.tokenize(jsonMessage.text);
+        let argument = tokenArray[1];
+        this.argumentsHandler(argument);
     }
 
-    postMessage = (message) => {
-        _groupMeAdapter.postMessage(message);
+    argumentsHandler = (argument) => {
+        switch(argument) {
+            case /standings/i:
+
+            break;
+            case /injuries/i:
+
+            break;
+            case /matchup/i:
+                _sleeperService.
+                break;
+            default:
+                //
+        }
     }
 };
 

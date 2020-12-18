@@ -5,11 +5,11 @@ module.exports = class SleeperService {
         _sleeperAdapter = sleeperAdapter;
     };
 
-    //not sure this will be needed anymore now that there is a usermappings config
-    getRosterByUserId = async (userId) => {
-        var leagueRosters = await _sleeperAdapter.getLeageRosters();
-        return leagueRosters.find(roster => roster.owner_id === userId);
-    };
+    getTeamNameByOwnerId = async (ownerId) => {
+        let userData = await _sleeperAdapter.getLeagueUsers();
+        let userMatch = userData.filter(user => user.user_id == ownerId);
+        return userMatch[0].metadata.team_name;
+    }
 
     getWeekNumber = async () => {
         var leagueData = await _sleeperAdapter.getLeagueData();
@@ -19,9 +19,13 @@ module.exports = class SleeperService {
     getCurrentMatchups = async () => {
         var currentWeekNumber = await this.getWeekNumber();
         return this.getMatchupsByWeekNumber(currentWeekNumber);
-    };
+    }
 
     getMatchupsByWeekNumber = async (weekNumber) => {
         return await _sleeperAdapter.getLeagueMatchupsByWeekNumber(weekNumber);
-    };
+    }
+
+    getLeagueStandings = async () => {
+
+    }
 }
