@@ -3,6 +3,7 @@
 const natural = require('natural');
 
 var _matchupsService, _injuryService, _groupMeAdapter;
+const defaultHelpMessage = "Use Sleeper Bot by typing: \n\n\"@sleeperbot {argument}\"\n\nwhere argument can be:\n\n\"help\"\n\"injuries\"\n\"matchups\"\n\"matchup";
 
 class GroupMeService {
     constructor(matchupsService, injuryService, groupMeAdapter) {
@@ -35,7 +36,7 @@ class GroupMeService {
         if(argumentsArray.includes(argument)) {
             this.argumentsHandler(argument);
         } else {
-            _groupMeAdapter.postMessage("i'm sorry, i don't know what that means");
+            _groupMeAdapter.postMessage(defaultHelpMessage);
         }
     }
 
@@ -43,7 +44,7 @@ class GroupMeService {
         let arg = argument.toLowerCase();
         switch(arg) {
             case "help":
-                await _groupMeAdapter.postMessage("how to use sleeperbot :)\n\n\"@sleeperbot {argument}\"\n\nwhere argument can be:\n\n\"help\"\n\"injuries\"\n\"matchups\"");
+                await _groupMeAdapter.postMessage(defaultHelpMessage);
                 break;
             case "standings":
                 await _groupMeAdapter.postMessage("sorry, can't do standings yet...");
